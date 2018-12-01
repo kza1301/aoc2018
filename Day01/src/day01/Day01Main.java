@@ -18,18 +18,21 @@ public class Day01Main {
 		boolean firstRun = true;
 		int firstFrequenceTwice = 0;
 		ArrayList<Integer> pastFrequences = new ArrayList<Integer>();
+		ArrayList<Integer> frequences = new ArrayList<Integer>();
+
 		
 		try {
 			in = new FileReader("./src/day01/Input.txt");
 			br = new BufferedReader(in);
 			
+			while((nextLine = br.readLine()) != null) {
+				frequences.add(Integer.parseInt(nextLine));
+			}
+	
 			while(!hitFrequenceTwice) {
-				
-				while((nextLine = br.readLine()) != null) {
+				for(Integer fr : frequences) {
 					pastFrequences.add(frequence);
-					frequence += Integer.parseInt(nextLine);
-					System.out.println(nextLine + "->" + frequence);
-					
+					frequence += fr;
 					if(pastFrequences.contains(frequence) && !hitFrequenceTwice) {
 						hitFrequenceTwice = true;
 						firstFrequenceTwice = frequence;
@@ -53,6 +56,7 @@ public class Day01Main {
 				in.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
+				e.getMessage();
 				e.printStackTrace();
 			}
 			
