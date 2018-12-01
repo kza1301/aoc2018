@@ -14,22 +14,34 @@ public class Day01Main {
 		FileReader in = null;
 		int frequence = 0;
 		String nextLine = "";
+		boolean hitFrequenceTwice = false;
+		boolean firstRun = true;
+		int firstFrequenceTwice = 0;
 		ArrayList<Integer> pastFrequences = new ArrayList<Integer>();
 		
 		try {
 			in = new FileReader("./src/day01/Input.txt");
 			br = new BufferedReader(in);
 			
-			while((nextLine = br.readLine()) != null) {
-				pastFrequences.add(frequence);
-				frequence += Integer.parseInt(nextLine);
-				System.out.println(nextLine + "->" + frequence);
+			while(!hitFrequenceTwice) {
 				
-				if(pastFrequences.contains(frequence)) {
-					System.out.println("First time same frequence: " + frequence);
+				while((nextLine = br.readLine()) != null) {
+					pastFrequences.add(frequence);
+					frequence += Integer.parseInt(nextLine);
+					System.out.println(nextLine + "->" + frequence);
+					
+					if(pastFrequences.contains(frequence) && !hitFrequenceTwice) {
+						hitFrequenceTwice = true;
+						firstFrequenceTwice = frequence;
+					}
 				}
-				
+				if(firstRun) {
+					System.out.println("Frequence after one full read of the input " + frequence);
+					firstRun = false;
+				}
 			}
+			
+			System.out.println("First time same frequence: " + firstFrequenceTwice);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
