@@ -70,5 +70,31 @@ public class Day02Main {
 		}
 		
 		System.out.println("Checksum: "+ twoOccurencies*threeOccurencies);
+		
+		for(int i = 0; i < boxIDs.size(); i++) {
+			String base = boxIDs.get(i);
+			for(int j = i+1; j < boxIDs.size(); j++) {
+				String compare = boxIDs.get(j);
+				int countDiffs = 0;
+				int diffPos = 0;
+				
+				for(int pos = 0; pos<base.length(); pos++) {
+					if(base.charAt(pos) != compare.charAt(pos)) {
+						countDiffs++;
+						diffPos = pos;
+						
+					}
+				}
+				
+				if(countDiffs == 1) {
+					
+					System.out.println("Base: " + boxIDs.get(i) + " Compare: " + boxIDs.get(j));
+					System.out.print("Cleared: " + boxIDs.get(i).substring(0, diffPos) + boxIDs.get(i).substring(diffPos+1));
+				}
+				else {
+					//System.out.println("Too different: " + boxIDs.get(i) +" - "+boxIDs.get(j));
+				}
+			}
+		}
 	}
 }
