@@ -15,14 +15,15 @@ public class Square {
     private int posY = 0;
     private int width = 0;
     private int height = 0;
+    private boolean overlaps = false;
     
     public Square(String s) {
         String[] parts = s.split(" ");
         id = Integer.parseInt(parts[0].substring(1));
         posX = Integer.parseInt(parts[2].substring(0, parts[2].indexOf(",")));
         posY = Integer.parseInt(parts[2].substring(parts[2].indexOf(",")+1, parts[2].length()-1));
-        height = Integer.parseInt(parts[3].substring(0, parts[3].indexOf("x")));
-        width = Integer.parseInt(parts[3].substring(parts[3].indexOf("x")+1));
+        width = Integer.parseInt(parts[3].substring(0, parts[3].indexOf("x")));
+        height = Integer.parseInt(parts[3].substring(parts[3].indexOf("x")+1));
     }
 
     public int getId() {
@@ -43,5 +44,13 @@ public class Square {
 
     public int getHeight() {
         return height;
+    }
+
+    public void setOverlaps(boolean overlaps) {
+        this.overlaps = overlaps;
+    }
+
+    public boolean isOverlaps() {
+        return overlaps;
     }
 }
