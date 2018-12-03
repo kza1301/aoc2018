@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * @author klaus.zambach
  */
 public class Day03 {
+
     /**
      * @param args the command line arguments
      */
@@ -29,68 +30,72 @@ public class Day03 {
         int[][] fabric = new int[coloumns][rows];
         int counter = 0;
 
-        for(int x = 0; x < coloumns; x++) {
-                for(int y = 0; y < rows; y++) {
-                    fabric[x][y] = 0;
-                }
+        for (int x = 0; x < coloumns; x++) {
+            for (int y = 0; y < rows; y++) {
+                fabric[x][y] = 0;
+            }
         }
-        
+
         try {
             in = new FileReader("./src/day03/Input03.txt");
             br = new BufferedReader(in);
 
-            while((nextLine = br.readLine()) != null) {
-                    squares.add(new Square(nextLine));
+            while ((nextLine = br.readLine()) != null) {
+                squares.add(new Square(nextLine));
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
-        }
-        finally {
+        } finally {
             try {
-                    if(br != null) br.close();
-                    if(in != null) in.close();
+                if (br != null) {
+                    br.close();
+                }
+                if (in != null) {
+                    in.close();
+                }
             } catch (IOException e) {
-                    e.getMessage();
-            }	
+                e.getMessage();
+            }
         }
-           
+
         //Part one my solution
-        for(Square s : squares) {
-            for(int x = s.getPosX(); x < s.getPosX()+s.getWidth(); x++) {
-                for(int y = s.getPosY(); y < s.getPosY()+s.getHeight(); y++) {
-                    if(fabric[x][y] == 0) {
+        for (Square s : squares) {
+            for (int x = s.getPosX(); x < s.getPosX() + s.getWidth(); x++) {
+                for (int y = s.getPosY(); y < s.getPosY() + s.getHeight(); y++) {
+                    if (fabric[x][y] == 0) {
                         fabric[x][y] = s.getId();
-                    }
-                    else {
+                    } else {
                         fabric[x][y] = -1;
                         s.setOverlaps(true);
-                    }                   
-                }
-            }
-        }
-        
-        for(int x = 0; x < coloumns; x++) {
-                for(int y = 0; y < rows; y++) {
-                    if(fabric[x][y] == -1) {
-                        counter++;
                     }
                 }
-        }
-        System.out.println("Overlapping inches: " + counter);
-        
-        //Part 2 my solution
-        for(Square s : squares) {
-            for(int x = s.getPosX(); x < s.getPosX()+s.getWidth(); x++) {
-                for(int y = s.getPosY(); y < s.getPosY()+s.getHeight(); y++) {
-                    if(fabric[x][y] != s.getId()) 
-                        s.setOverlaps(true);
-                }                   
             }
         }
-        
-        for(Square s : squares) {
-            if(!s.isOverlaps())
-                System.out.println("The one " + s.getId());
+
+        for (int x = 0; x < coloumns; x++) {
+            for (int y = 0; y < rows; y++) {
+                if (fabric[x][y] == -1) {
+                    counter++;
+                }
+            }
         }
-   }
+        System.out.println("Overlapping inches: " + counter);
+
+        //Part 2 my solution
+        for (Square s : squares) {
+            for (int x = s.getPosX(); x < s.getPosX() + s.getWidth(); x++) {
+                for (int y = s.getPosY(); y < s.getPosY() + s.getHeight(); y++) {
+                    if (fabric[x][y] != s.getId()) {
+                        s.setOverlaps(true);
+                    }
+                }
+            }
+        }
+
+        for (Square s : squares) {
+            if (!s.isOverlaps()) {
+                System.out.println("The one " + s.getId());
+            }
+        }
+    }
 }
