@@ -7,7 +7,7 @@ package day04;
 
 /**
  *
- * @author klaus
+ * @author klaus.zambach
  */
 public class Day04 {
 
